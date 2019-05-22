@@ -1,0 +1,22 @@
+---
+- name: "test"
+  hosts: localhost
+  gather_facts: no
+  tasks:
+   ## Set the All vars
+    - name: Populate allvars
+      shell: set -o pipefail | cat variables.ini | grep -A11 "#AllVars#" > /Users/akashmainali/Desktop/Playground/allvars.yml
+      args:
+        executable: /bin/bash
+
+   ## Set the Director vars
+    - name: Populate Director Vars
+      shell: set -o pipefail | cat variables.ini | grep -A18 "#DirectorVars#" > /Users/akashmainali/Desktop/Playground/directorvars.yml
+      args:
+        executable: /bin/bash
+
+  ## Set the KVM vars
+    - name: Populate KVM Vars
+      shell: set -o pipefail | cat variables.ini | grep -A54 "#KVMVars#" > /Users/akashmainali/Desktop/Playground/kvmvars.yml
+      args:
+        executable: /bin/bash

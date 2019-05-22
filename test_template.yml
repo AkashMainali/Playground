@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: no
+  become: no
+  vars:
+    codename: amainali
+    dept: admin
+  tasks:
+    - name: deploy config file
+      template:
+       src: test_template.j2
+       dest: /Users/akashmainali/Desktop/Playground/output

@@ -1,0 +1,112 @@
+# This Playbook will set up all the variables for the setup of Openstack Undercloud
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+##### This part will create the all vars folder inside Group Vars #####
+##### Change the configuration file according to the server specification carefully #####
+    - name: Create All vars variable in group var directory
+      blockinfile:
+        path: /Users/akashmainali/Desktop/Playground/allvars.yml
+        block: |
+          ---
+          domain: uscc.com
+          satellite_cert_url: http://ilscha03-rhsat-01.uscc.com/pub/katello-ca-consumer-latest.noarch.rpm
+          satellite_activationkey: openstack-dev-ak
+          satellite_organization: US_Cellular_Eng
+          dns_servers:
+            - 10.119.2.241
+            - 165.27.5.130
+          ntp_servers:
+            - 10.119.10.77
+            - 165.27.5.45
+        create: yes
+
+##### This part will create the director vars folder inside Group Vars #####
+##### Change the configuration file according to the server specification carefully #####
+    - name: Create Director vars variable in group var directory
+      blockinfile:
+        path: /Users/akashmainali/Desktop/Playground/directorvars.yml
+        block: |
+          ---
+           yum_repos:
+            - rhel-7-server-rpms
+            - rhel-7-server-extras-rpms
+            - rhel-7-server-rh-common-rpms
+            - rhel-ha-for-rhel-7-server-rpms
+            - rhel-7-server-openstack-13-rpms
+            - rhel-7-server-openstack-13-optools-rpms
+            - rhel-7-server-openstack-13-tools-rpms
+            - rhel-7-server-rhceph-3-tools-rpms
+           role_packages:
+            - python-tripleoclient
+            - ceph-ansible
+            - git
+            - rhosp-director-images
+            - screen
+            - libguestfs-tools
+            - vim
+        create: yes
+
+##### This part will create the KVM vars folder inside Group Vars #####
+##### Change the configuration file according to the server specification carefully #####
+    - name: Create KVM vars variable in group var directory
+      blockinfile:
+          path: /Users/akashmainali/Desktop/Playground/kvmvars.yml
+          block: |
+            ---
+            yum_repos:
+              - rhel-7-server-rpms
+              - rhel-7-server-satellite-tools-6.4-rpms
+            role_packages:
+              - libguestfs-tools
+              - libvirt
+              - qemu-kvm
+              - virt-install
+              - libguestfs-xfs
+              - katello-agent
+              - vim
+            kvm_bridges:
+              br_publicapi:
+                device: bond1
+              br_control:
+                device: bond0
+            kvm_images_path: /var/lib/libvirt/images
+            rhel_guest_image: rhel-server-7.6-x86_64-kvm.qcow2
+            vm_root_password: chang3me
+            kvm_guests:
+              director:
+                name: director
+                config: >
+                  --ram 16384 --vcpus 4 --os-variant rhel7
+                  --disk path=/var/lib/libvirt/images/director.qcow2,device=disk,bus=virtio,format=qcow2
+                  --import --noautoconsole --vnc --autostart
+                  --bridge  br-control
+                  --bridge  br-external
+                  --name director
+                nics:
+                  eth0: |
+                    cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-eth0
+                    DEVICE="eth0"
+                    ONBOOT="yes"
+                    TYPE="Ethernet"
+                    PEERDNS="yes"
+                    IPV6INIT="no"
+                    IPADDR=172.16.1.2
+                    NETMASK=255.255.255.0
+                    EOF
+                  eth1: |
+                    cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-eth1
+                    DEVICE="eth1"
+                    ONBOOT="yes"
+                    TYPE="Ethernet"
+                    PEERDNS="no"
+                    IPV6INIT="no"
+                    IPADDR=10.172.200.2
+                    NETMASK=255.255.255.0
+                    GATEWAY=10.172.200.30
+                    DNS1=10.119.2.241
+                    DNS2=165.27.5.130
+                    EOF
+          create: yes
+

@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    ## Example of error that might occur
+    ## Save the errors using register
+    ## Stop the playbook run if such error occures.
