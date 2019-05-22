@@ -1,0 +1,52 @@
+{#KVMVars#}
+---
+yum_repos:
+   {% for item in kvm_yum_repos %}
+   {{ item }}
+{% endfor %}
+
+role_packages:
+   {% for item in kvm_role_packages %}
+   {{ item }}
+{% endfor %}
+kvm_bridges:
+  br_publicapi:
+    device: {{ kvm_bridges_br_publicapi_device }}
+  br_control:
+    device: {{ kvm_bridges_br_control_device }}
+kvm_images_path: {{ kvm_images_path }}
+rhel_guest_image: {{ rhel_guest_image }}
+vm_root_password: {{vm_root_password }}
+kvm_guests:
+  director:
+    name: {{ director_name }}
+    config: {% for item in config %}
+        {{ item }}
+{% endfor %}
+    nics:
+      eth0: |
+        cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-eth0
+        DEVICE="eth0"
+        ONBOOT="yes"
+        TYPE="Ethernet"
+        PEERDNS="yes"
+        IPV6INIT="no"
+        IPADDR= {{ eth0_IPADDR }}
+        NETMASK= {{ eth0_NETMASK }}
+        EOF
+      eth1: |
+        cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-eth1
+        DEVICE="eth1"
+        ONBOOT="yes"
+        TYPE="Ethernet"
+        PEERDNS="no"
+        IPV6INIT="no"
+        IPADDR= {{ eth1_IPADDR }}
+        NETMASK= {{ eth1_NETMASK  }}
+        GATEWAY= {{ eth1_GATEWAY }}
+        DNS1= {{ eth1_DNS1 }}
+        DNS2= {{ eth1_DNS2}}
+        EOF
+
+
+

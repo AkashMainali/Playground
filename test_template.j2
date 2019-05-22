@@ -1,2 +1,16 @@
-name = {{ codename }}
-department = {{ dept }}
+[DEFAULT]
+undercloud_hostname = {{ hostname }}
+local_ip = {{ local_ip_address }}
+undercloud_public_host = {{ undercloud_public_host_ip }}
+undercloud_admin_host = {{ undercloud_admin_host_ip }}
+undercloud_nameservers = {{ undercloud_nameservers }}
+local_interface = {{ local_interface }}
+clean_nodes = {{ clean_nodes }}
+generate_service_certificate = {{ generate_service_certificate }}
+[ctlplane-subnet]
+cidr = {{ cidr_ip }}
+dhcp_start = {{ dhcp_start_ip }}
+dhcp_end = {{ dhcp_end_ip }}
+inspection_iprange = {{ inspection_iprange }}
+gateway = {{ gateway_ip }}
+masquerade = {{ masquerade }}

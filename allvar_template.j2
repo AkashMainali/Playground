@@ -1,0 +1,16 @@
+{#AllVars#}
+---
+domain: {{ domain }}
+satellite_cert_url: {{ satellite_cert_url }}
+satellite_activationkey: {{ satellite_activationkey }}
+satellite_organization: {{ satellite_organization }}
+dns_servers:
+{% for item in dns_servers %}
+  {{ item }}
+{% endfor %}
+ntp_servers:
+{% for item in ntp_servers %}
+  {{ item }}
+{% endfor %}
+
+

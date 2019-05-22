@@ -2,9 +2,8 @@
 - hosts: localhost
   gather_facts: no
   become: no
-  vars:
-    codename: amainali
-    dept: admin
+  vars_files:
+    - template_vars.yml
   tasks:
     - name: deploy config file
       template:

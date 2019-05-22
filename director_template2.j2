@@ -1,0 +1,12 @@
+{#DirectorVar#}
+---
+yum_repos:
+{% for item in director_yum_repos %}
+  {{ item }}
+{% endfor %}
+role_packages:
+{% for item in director_role_packages %}
+  {{ item }}
+{% endfor %}
+{#EOF#}
+

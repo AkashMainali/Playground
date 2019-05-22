@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - variables.yml
+  tasks:
+    - name: generate all vars
+      template:
+        src: allvar_template.j2
+        dest: allvars.yml
+
+    - name: generate director vars
+      template:
+        src: director_template2.j2
+        dest: directorvar.yml
+
+    - name: generate director vars
+      template:
+        src: kvmvar_template.j2
+        dest: kvmvar.yml
