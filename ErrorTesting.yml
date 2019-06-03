@@ -5,3 +5,23 @@
     ## Example of error that might occur
     ## Save the errors using register
     ## Stop the playbook run if such error occures.
+    - name: Cat the openshift output
+      command: cat /Users/akashmainali/Desktop/Playground/input_errorhandling
+      register: catoutput
+
+    - name: Fail the task if all not available
+      fail:
+       msg: "All nodes are not available at this moment"
+      when:
+       - catoutput.stdout.find('manage') != -1 or
+         catoutput.stdout.find('enroll') != -1 or
+         catoutput.stdout.find('cleaning') != -1 or
+         catoutput.stdout.find('clean failed') != -1 or
+         catoutput.stdout.find('clean wait') != -1
+
+    - name: Get the wwn number
+      shell: cat "/Users/akashmainali/Desktop/Playground/input_errorhandling" | grep "UCSC-RAID12G-2GB" -B8 | head -1 | tr -d '"wwn":',','
+      register: wwn
+
+    -  debug:
+        msg: "{{ wwn.stdout }}"

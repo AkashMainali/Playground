@@ -1,0 +1,50 @@
++--------------------------------------+------------------------+---------------+-------------+--------------------+-------------+
+| UUID                                 | Name                   | Instance UUID | Power State | Provisioning State | Maintenance |
++--------------------------------------+------------------------+---------------+-------------+--------------------+-------------+
+| bfd2d3d0-ed19-46a9-92d1-5b61e248544f | ilscha04-oscontrolp-01 | None          | power off   | available          | False       |
+| b9431d59-f32d-49eb-b154-2be6893e698e | ilscha04-oscontrolp-02 | None          | power off   | available          | False       |
+| 97905c76-9e28-4142-be92-3ba070c09c90 | ilscha04-oscontrolp-03 | None          | power off   | available          | False       |
+| 281673e4-282f-459c-9200-e7c69afb71a2 | ilscha04-oscompp-01    | None          | power off   | available          | False       |
+| 59462687-a935-485b-848a-38cc7389e6a3 | ilscha04-oscompp-02    | None          | power off   | available          | False       |
+| 2410fae0-759d-4804-a363-83b225c9aa16 | ilscha04-oscompp-03    | None          | power off   | available          | False       |
++--------------------------------------+------------------------+---------------+-------------+--------------------+-------------+
+
+{
+    "size": 480103981056,
+    "serial": "58ce38ee20338f75",
+    "wwn": "0x58ce38ee20338f75",
+    "rotational": false,
+    "vendor": "TOSHIBA",
+    "name": "/dev/sda",
+    "wwn_vendor_extension": null,
+    "hctl": "0:0:17:0",
+    "wwn_with_extension": "0x58ce38ee20338f75",
+    "by_path": "/dev/disk/by-path/pci-0000:66:00.0-scsi-0:0:17:0",
+    "model": "PX05SRB048"
+  },
+  {
+    "size": 480103981056,
+    "serial": "58ce38ee20338f99",
+    "wwn": "0x58ce38ee20338f99",
+    "rotational": false,
+    "vendor": "TOSHIBA",
+    "name": "/dev/sdb",
+    "wwn_vendor_extension": null,
+    "hctl": "0:0:19:0",
+    "wwn_with_extension": "0x58ce38ee20338f99",
+    "by_path": "/dev/disk/by-path/pci-0000:66:00.0-scsi-0:0:19:0",
+    "model": "PX05SRB048"
+  },
+  {
+    "size": 478998953984,
+    "serial": "6cc167e972da7880246df407a0cd6579",
+    "wwn": "0x6cc167e972da7880",
+    "rotational": true,
+    "vendor": "Cisco",
+    "name": "/dev/sdc",
+    "wwn_vendor_extension": "0x246df407a0cd6579",
+    "hctl": "0:2:0:0",
+    "wwn_with_extension": "0x6cc167e972da7880246df407a0cd6579",
+    "by_path": "/dev/disk/by-path/pci-0000:66:00.0-scsi-0:2:0:0",
+    "model": "UCSC-RAID12G-2GB"
+  }
